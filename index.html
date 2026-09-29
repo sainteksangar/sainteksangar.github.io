@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Lost & Found - UIN Sunan Ampel</title>
+    <!-- Font Google: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           THEME STYLES - INSPIRED BY MY.UINSA.AC.ID
+           ========================================================================== */
+        :root {
+            --uinsa-green: #006633;
+            --uinsa-green-hover: #004d26;
+            --uinsa-light-green: #e6f4ea;
+            --uinsa-gold: #d97706;
+            --danger: #dc2626;
+            --success: #16a34a;
+            --bg-body: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-primary: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR HEADER */
+        .navbar {
+            background: linear-gradient(135deg, #005229 0%, #006633 60%, #008040 100%);
+            color: white;
+            padding: 14px 24px;
+            box-shadow: var(--shadow-md);
+            border-bottom: 4px solid #eab308;
+        }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-logo { background-color: #eab308; color: #004d26; font-weight: 800; font-size: 16px; padding: 6px 10px; border-radius: 6px; }
+        .brand-title { display: block; font-size: 16px; font-weight: 700; }
+        .brand-subtitle { display: block; font-size: 11px; color: #cbd5e1; }
+        .user-session { display: flex; align-items: center; gap: 12px; }
+        .user-badge { background: rgba(255, 255, 255, 0.15); padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+
+        /* CARDS */
+        .main-content { padding: 30px 16px; }
+        .container { max-width: 1050px; margin: 0 auto; }
+        .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
+        .card-login { max-width: 420px; margin: 40px auto; }
+        .portal-badge { display: inline-block; background: var(--uinsa-light-green); color: var(--uinsa-green); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
+        
+        /* FORM & BUTTONS */
+        .form-group { margin-bottom: 18px; text-align: left; }
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+        input, textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-md); font-family: inherit; }
+        .btn { display: inline-block; padding: 10px 20px; font-size: 14px; font-weight: 600; border-radius: var(--radius-md); border: none; cursor: pointer; text-align: center; }
+        .btn-block { width: 100%; }
+        .btn-primary { background-color: var(--uinsa-green); color: white; }
+        .btn-danger { background-color: var(--danger); color: white; }
+        .btn-success { background-color: var(--success); color: white; }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); }
+        
+        /* TABLES */
+        .section-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; margin-bottom: 30px;}
+        .section-title-bar { padding: 16px 20px; border-bottom: 1px solid var(--border-color); }
+        .lost-header { background-color: #fef2f2; }
+        .found-header { background-color: #f0fdf4; }
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 750px; }
+        th { background-color: #f8fafc; font-size: 12px; padding: 12px 16px; text-align: left; }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        .item-photo { width: 65px; height: 65px; object-fit: cover; border-radius: 6px; }
+        .no-photo { font-size: 11px; background: #f1f5f9; padding: 8px; border-radius: 6px; }
+        
+        /* UTILS */
+        .hidden { display: none !important; }
+        .flex-between { display: flex; justify-content: space-between; align-items: center; }
+        .text-center { text-align: center; }
+        .wa-link { background-color: #25D366; color: white; padding: 6px 12px; text-decoration: none; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .hero-section { padding: 40px 20px; }
+        .status-chip { background: #fef3c7; color: var(--uinsa-gold); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 12px; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand">
+                <div class="brand-logo">UINSA</div>
+                <div class="brand-text">
+                    <span class="brand-title">PORTAL LOST & FOUND</span>
+                    <span class="brand-subtitle">UIN Sunan Ampel Surabaya</span>
+                </div>
+            </div>
+            <div id="user-session" class="user-session hidden">
+                <span class="user-badge">🔑 <span id="display-nim"></span></span>
+                <button class="btn-logout" onclick="logout()">Keluar</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container" id="main-container">
+            
+            <!-- HALAMAN 0: LOGIN -->
+            <div id="page-login" class="card card-login">
+                <div class="card-header text-center">
+                    <div class="portal-badge">Single Sign-On</div>
+                    <h2>Masuk Portal Akademik</h2>
+                    <p>Gunakan NIM dan Password MyUINSA Anda</p>
+                </div>
+                <form id="form-login">
+                    <div class="form-group">
+                        <label>NIM (Nomor Induk Mahasiswa)</label>
+                        <input type="number" id="login-nim" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kata Sandi</label>
+                        <input type="password" id="login-pass" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Masuk ke Sistem</button>
+                </form>
+            </div>
+
+            <!-- HALAMAN 1: LANDING PAGE -->
+            <div id="page-home" class="card hidden text-center">
+                <div class="hero-section">
+                    <span class="status-chip">Layanan Kemahasiswaan</span>
+                    <h1 style="color:var(--uinsa-green); margin: 16px 0;">Layanan Pelaporan & Pencarian Barang</h1>
+                    <p style="margin-bottom:20px;">Fasilitas resmi untuk membantu civitas akademika UIN Sunan Ampel Surabaya dalam menemukan dan mengamankan barang hilang.</p>
+                    <button class="btn btn-primary" onclick="switchPage('page-dashboard')">Buka Dashboard Laporan</button>
+                </div>
+            </div>
+
+            <!-- HALAMAN 2: DASHBOARD -->
+            <div id="page-dashboard" class="hidden">
+                <div class="flex-between" style="margin-bottom: 20px;">
+                    <h2>Dashboard Informasi Barang</h2>
+                    <button class="btn btn-outline" onclick="switchPage('page-home')">← Kembali</button>
+                </div>
+
+                <div class="section-card">
+                    <div class="flex-between section-title-bar lost-header">
+                        <h3>🔴 Barang Hilang (Lost)</h3>
+                        <button class="btn btn-danger" onclick="switchPage('page-form-lost')">+ Lapor Kehilangan</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr><th>Foto</th><th>Pelapor</th><th>Deskripsi Barang</th><th>Imbalan</th><th>Kontak WA</th><th>Aksi</th></tr>
+                            </thead>
+                            <tbody id="lost-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="flex-between section-title-bar found-header">
+                        <h3>🟢 Barang Ditemukan (Found)</h3>
+                        <button class="btn btn-success" onclick="switchPage('page-form-found')">+ Lapor Penemuan</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr><th>Foto</th><th>Penemu</th><th>Deskripsi Barang</th><th>Lokasi Ditemukan</th><th>Kontak WA</th><th>Aksi</th></tr>
+                            </thead>
+                            <tbody id="found-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HALAMAN 3 & 4: FORMS -->
+            <div id="page-form-lost" class="card hidden">
+                <h2>Lapor Kehilangan Barang</h2><br>
+                <form id="form-lost">
+                    <div class="form-group"><label>Nama Lengkap</label><input type="text" id="lost-nama" required></div>
+                    <div class="form-group"><label>Deskripsi Barang</label><textarea id="lost-deskripsi" required></textarea></div>
+                    <div class="form-group"><label>Bounty / Imbalan</label><input type="text" id="lost-bounty"></div>
+                    <div class="form-group"><label>No WhatsApp</label><input type="number" id="lost-wa" required></div>
+                    <div class="form-group"><label>Foto</label><input type="file" id="lost-foto"></div>
+                    <div class="flex-between">
+                        <button type="button" class="btn btn-outline" onclick="switchPage('page-dashboard')">Batal</button>
+                        <button type="submit" class="btn btn-danger">Kirim Laporan</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="page-form-found" class="card hidden">
+                <h2>Lapor Penemuan Barang</h2><br>
+                <form id="form-found">
+                    <div class="form-group"><label>Nama Penemu</label><input type="text" id="found-nama" required></div>
+                    <div class="form-group"><label>Deskripsi Barang</label><textarea id="found-deskripsi" required></textarea></div>
+                    <div class="form-group"><label>Lokasi Ditemukan</label><input type="text" id="found-lokasi" required></div>
+                    <div class="form-group"><label>No WhatsApp</label><input type="number" id="found-wa" required></div>
+                    <div class="form-group"><label>Foto (Wajib)</label><input type="file" id="found-foto" required></div>
+                    <div class="flex-between">
+                        <button type="button" class="btn btn-outline" onclick="switchPage('page-dashboard')">Batal</button>
+                        <button type="submit" class="btn btn-success">Kirim Laporan</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // JS Logic
+        function checkLoginStatus() {
+            const nim = sessionStorage.getItem('activeNIM');
+            if (nim) {
+                document.getElementById('display-nim').innerText = nim;
+                document.getElementById('user-session').classList.remove('hidden');
+                if(!document.getElementById('page-login').classList.contains('hidden')) switchPage('page-home');
+            } else {
+                document.getElementById('user-session').classList.add('hidden');
+                switchPage('page-login');
+            }
+        }
+
+        document.getElementById('form-login').addEventListener('submit', (e) => {
+            e.preventDefault();
+            sessionStorage.setItem('activeNIM', document.getElementById('login-nim').value);
+            checkLoginStatus(); e.target.reset();
+        });
+
+        function logout() { sessionStorage.removeItem('activeNIM'); checkLoginStatus(); }
+
+        function switchPage(pageId) {
+            ['page-login', 'page-home', 'page-dashboard', 'page-form-lost', 'page-form-found'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            if (pageId === 'page-dashboard') renderTables();
+        }
+
+        function formatWA(num) { return String(num).startsWith('0') ? '62' + String(num).substring(1) : num; }
+        function getBase64(file) { return new Promise((res, rej) => { if(!file) res(""); const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(file); }); }
+
+        function renderTables() {
+            const activeNIM = sessionStorage.getItem('activeNIM');
+            
+            const renderRows = (data, isFound) => {
+                if(!data.length) return `<tr><td colspan="6" class="text-center">Belum ada data.</td></tr>`;
+                return data.map((v, i) => `<tr>
+                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<span class="no-photo">No Foto</span>`}</td>
+                    <td><b>${v.nama}</b><br><small>NIM: ${v.nim}</small></td>
+                    <td>${v.deskripsi}</td>
+                    <td>${isFound ? v.lokasi : (v.bounty || '-')}</td>
+                    <td><a href="https://wa.me/${formatWA(v.wa)}" class="wa-link">WA</a></td>
+                    <td>${v.nim === activeNIM ? `<button class="btn btn-danger" onclick="hapusData('${isFound?'foundData':'lostData'}',${i})">Hapus</button>` : '-'}</td>
+                </tr>`).join('');
+            };
+
+            document.getElementById('lost-table-body').innerHTML = renderRows(JSON.parse(localStorage.getItem('lostData'))||[], false);
+            document.getElementById('found-table-body').innerHTML = renderRows(JSON.parse(localStorage.getItem('foundData'))||[], true);
+        }
+
+        function hapusData(key, index) {
+            let data = JSON.parse(localStorage.getItem(key));
+            data.splice(index, 1);
+            localStorage.setItem(key, JSON.stringify(data));
+            renderTables();
+        }
+
+        document.getElementById('form-lost').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            let data = JSON.parse(localStorage.getItem('lostData')) || [];
+            data.push({ nim: sessionStorage.getItem('activeNIM'), nama: document.getElementById('lost-nama').value, deskripsi: document.getElementById('lost-deskripsi').value, bounty: document.getElementById('lost-bounty').value, wa: document.getElementById('lost-wa').value, foto: await getBase64(document.getElementById('lost-foto').files[0]) });
+            localStorage.setItem('lostData', JSON.stringify(data));
+            e.target.reset(); switchPage('page-dashboard');
+        });
+
+        document.getElementById('form-found').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            let data = JSON.parse(localStorage.getItem('foundData')) || [];
+            data.push({ nim: sessionStorage.getItem('activeNIM'), nama: document.getElementById('found-nama').value, deskripsi: document.getElementById('found-deskripsi').value, lokasi: document.getElementById('found-lokasi').value, wa: document.getElementById('found-wa').value, foto: await getBase64(document.getElementById('found-foto').files[0]) });
+            localStorage.setItem('foundData', JSON.stringify(data));
+            e.target.reset(); switchPage('page-dashboard');
+        });
+
+        checkLoginStatus();
+    </script>
+</body>
+</html>
