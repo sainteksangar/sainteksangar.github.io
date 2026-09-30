@@ -10,12 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ==========================================================================
-           THEME STYLES - INSPIRED BY MY.UINSA.AC.ID
-           ========================================================================== */
+        /* THEME STYLES */
         :root {
             --uinsa-green: #006633;
-            --uinsa-green-hover: #004d26;
             --uinsa-light-green: #e6f4ea;
             --uinsa-gold: #d97706;
             --danger: #dc2626;
@@ -23,7 +20,6 @@
             --bg-body: #f1f5f9;
             --card-bg: #ffffff;
             --text-primary: #0f172a;
-            --text-muted: #64748b;
             --border-color: #e2e8f0;
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
             --radius-md: 10px;
@@ -40,14 +36,7 @@
             min-height: 100vh;
         }
 
-        /* NAVBAR HEADER */
-        .navbar {
-            background: linear-gradient(135deg, #005229 0%, #006633 60%, #008040 100%);
-            color: white;
-            padding: 14px 24px;
-            box-shadow: var(--shadow-md);
-            border-bottom: 4px solid #eab308;
-        }
+        .navbar { background: linear-gradient(135deg, #005229 0%, #006633 60%, #008040 100%); color: white; padding: 14px 24px; box-shadow: var(--shadow-md); border-bottom: 4px solid #eab308; }
         .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .brand { display: flex; align-items: center; gap: 12px; }
         .brand-logo { background-color: #eab308; color: #004d26; font-weight: 800; font-size: 16px; padding: 6px 10px; border-radius: 6px; }
@@ -57,14 +46,12 @@
         .user-badge { background: rgba(255, 255, 255, 0.15); padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
         .btn-logout { background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; }
 
-        /* CARDS */
         .main-content { padding: 30px 16px; }
         .container { max-width: 1050px; margin: 0 auto; }
         .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
         .card-login { max-width: 420px; margin: 40px auto; }
         .portal-badge { display: inline-block; background: var(--uinsa-light-green); color: var(--uinsa-green); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
         
-        /* FORM & BUTTONS */
         .form-group { margin-bottom: 18px; text-align: left; }
         label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
         input, textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-md); font-family: inherit; }
@@ -75,7 +62,6 @@
         .btn-success { background-color: var(--success); color: white; }
         .btn-outline { background: transparent; border: 1px solid var(--border-color); }
         
-        /* TABLES */
         .section-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; margin-bottom: 30px;}
         .section-title-bar { padding: 16px 20px; border-bottom: 1px solid var(--border-color); }
         .lost-header { background-color: #fef2f2; }
@@ -87,7 +73,6 @@
         .item-photo { width: 65px; height: 65px; object-fit: cover; border-radius: 6px; }
         .no-photo { font-size: 11px; background: #f1f5f9; padding: 8px; border-radius: 6px; }
         
-        /* UTILS */
         .hidden { display: none !important; }
         .flex-between { display: flex; justify-content: space-between; align-items: center; }
         .text-center { text-align: center; }
@@ -193,10 +178,10 @@
                     <div class="form-group"><label>Deskripsi Barang</label><textarea id="lost-deskripsi" required></textarea></div>
                     <div class="form-group"><label>Bounty / Imbalan</label><input type="text" id="lost-bounty"></div>
                     <div class="form-group"><label>No WhatsApp</label><input type="number" id="lost-wa" required></div>
-                    <div class="form-group"><label>Foto</label><input type="file" id="lost-foto"></div>
+                    <div class="form-group"><label>Foto</label><input type="file" id="lost-foto" accept="image/*"></div>
                     <div class="flex-between">
                         <button type="button" class="btn btn-outline" onclick="switchPage('page-dashboard')">Batal</button>
-                        <button type="submit" class="btn btn-danger">Kirim Laporan</button>
+                        <button type="submit" class="btn btn-danger" id="btn-submit-lost">Kirim Laporan</button>
                     </div>
                 </form>
             </div>
@@ -208,10 +193,10 @@
                     <div class="form-group"><label>Deskripsi Barang</label><textarea id="found-deskripsi" required></textarea></div>
                     <div class="form-group"><label>Lokasi Ditemukan</label><input type="text" id="found-lokasi" required></div>
                     <div class="form-group"><label>No WhatsApp</label><input type="number" id="found-wa" required></div>
-                    <div class="form-group"><label>Foto (Wajib)</label><input type="file" id="found-foto" required></div>
+                    <div class="form-group"><label>Foto (Wajib)</label><input type="file" id="found-foto" accept="image/*" required></div>
                     <div class="flex-between">
                         <button type="button" class="btn btn-outline" onclick="switchPage('page-dashboard')">Batal</button>
-                        <button type="submit" class="btn btn-success">Kirim Laporan</button>
+                        <button type="submit" class="btn btn-success" id="btn-submit-found">Kirim Laporan</button>
                     </div>
                 </form>
             </div>
@@ -219,79 +204,187 @@
         </div>
     </main>
 
-    <script>
-        // JS Logic
+    <!-- FIREBASE MODULE SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Konfigurasi Firebase dari akunmu
+        const firebaseConfig = {
+            apiKey: "AIzaSyAAvTpntEGvlFtTJS4IkAwv9mzaiSa_E8c",
+            authDomain: "lostandfound-75bcd.firebaseapp.com",
+            projectId: "lostandfound-75bcd",
+            storageBucket: "lostandfound-75bcd.firebasestorage.app",
+            messagingSenderId: "946815404232",
+            appId: "1:946815404232:web:8b9240c7ae4591c7543dfd",
+            measurementId: "G-H638SQTDJ4"
+        };
+
+        // Inisialisasi Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Fungsi Global untuk UI HTML
+        window.switchPage = function(pageId) {
+            ['page-login', 'page-home', 'page-dashboard', 'page-form-lost', 'page-form-found'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+        };
+
+        window.logout = function() {
+            sessionStorage.removeItem('activeNIM');
+            checkLoginStatus();
+        };
+
+        window.hapusData = async function(collectionName, docId) {
+            if (confirm("Apakah Anda yakin ingin menghapus laporan ini?")) {
+                try {
+                    await deleteDoc(doc(db, collectionName, docId));
+                } catch (err) {
+                    alert("Gagal menghapus data: " + err.message);
+                }
+            }
+        };
+
+        // Autentikasi Sederhana
         function checkLoginStatus() {
             const nim = sessionStorage.getItem('activeNIM');
             if (nim) {
                 document.getElementById('display-nim').innerText = nim;
                 document.getElementById('user-session').classList.remove('hidden');
-                if(!document.getElementById('page-login').classList.contains('hidden')) switchPage('page-home');
+                if(!document.getElementById('page-login').classList.contains('hidden')) window.switchPage('page-home');
             } else {
                 document.getElementById('user-session').classList.add('hidden');
-                switchPage('page-login');
+                window.switchPage('page-login');
             }
         }
 
         document.getElementById('form-login').addEventListener('submit', (e) => {
             e.preventDefault();
             sessionStorage.setItem('activeNIM', document.getElementById('login-nim').value);
-            checkLoginStatus(); e.target.reset();
+            checkLoginStatus();
+            e.target.reset();
         });
 
-        function logout() { sessionStorage.removeItem('activeNIM'); checkLoginStatus(); }
-
-        function switchPage(pageId) {
-            ['page-login', 'page-home', 'page-dashboard', 'page-form-lost', 'page-form-found'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-            document.getElementById(pageId).classList.remove('hidden');
-            if (pageId === 'page-dashboard') renderTables();
+        // Utilitas
+        function formatWA(num) { return String(num).startsWith('0') ? '62' + String(num).substring(1) : num; }
+        
+        // Kompresi Gambar agar database tidak cepat penuh
+        function getBase64(file) { 
+            return new Promise((res, rej) => { 
+                if(!file) return res(""); 
+                const reader = new FileReader(); 
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 400; // Dikompres agar lebih kecil
+                        const scaleSize = MAX_WIDTH / img.width;
+                        canvas.width = (img.width > MAX_WIDTH) ? MAX_WIDTH : img.width;
+                        canvas.height = (img.width > MAX_WIDTH) ? (img.height * scaleSize) : img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        res(canvas.toDataURL('image/jpeg', 0.6));
+                    };
+                }; 
+                reader.readAsDataURL(file); 
+            }); 
         }
 
-        function formatWA(num) { return String(num).startsWith('0') ? '62' + String(num).substring(1) : num; }
-        function getBase64(file) { return new Promise((res, rej) => { if(!file) res(""); const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(file); }); }
-
-        function renderTables() {
+        // Listener REAL-TIME untuk Tabel Barang Hilang
+        onSnapshot(collection(db, "lostData"), (snapshot) => {
             const activeNIM = sessionStorage.getItem('activeNIM');
-            
-            const renderRows = (data, isFound) => {
-                if(!data.length) return `<tr><td colspan="6" class="text-center">Belum ada data.</td></tr>`;
-                return data.map((v, i) => `<tr>
+            const body = document.getElementById('lost-table-body');
+            if (snapshot.empty) {
+                body.innerHTML = `<tr><td colspan="6" class="text-center">Belum ada data barang hilang.</td></tr>`;
+                return;
+            }
+            body.innerHTML = snapshot.docs.map(docSnap => {
+                const v = docSnap.data();
+                const id = docSnap.id;
+                return `<tr>
                     <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<span class="no-photo">No Foto</span>`}</td>
                     <td><b>${v.nama}</b><br><small>NIM: ${v.nim}</small></td>
                     <td>${v.deskripsi}</td>
-                    <td>${isFound ? v.lokasi : (v.bounty || '-')}</td>
-                    <td><a href="https://wa.me/${formatWA(v.wa)}" class="wa-link">WA</a></td>
-                    <td>${v.nim === activeNIM ? `<button class="btn btn-danger" onclick="hapusData('${isFound?'foundData':'lostData'}',${i})">Hapus</button>` : '-'}</td>
-                </tr>`).join('');
-            };
-
-            document.getElementById('lost-table-body').innerHTML = renderRows(JSON.parse(localStorage.getItem('lostData'))||[], false);
-            document.getElementById('found-table-body').innerHTML = renderRows(JSON.parse(localStorage.getItem('foundData'))||[], true);
-        }
-
-        function hapusData(key, index) {
-            let data = JSON.parse(localStorage.getItem(key));
-            data.splice(index, 1);
-            localStorage.setItem(key, JSON.stringify(data));
-            renderTables();
-        }
-
-        document.getElementById('form-lost').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            let data = JSON.parse(localStorage.getItem('lostData')) || [];
-            data.push({ nim: sessionStorage.getItem('activeNIM'), nama: document.getElementById('lost-nama').value, deskripsi: document.getElementById('lost-deskripsi').value, bounty: document.getElementById('lost-bounty').value, wa: document.getElementById('lost-wa').value, foto: await getBase64(document.getElementById('lost-foto').files[0]) });
-            localStorage.setItem('lostData', JSON.stringify(data));
-            e.target.reset(); switchPage('page-dashboard');
+                    <td>${v.bounty || '-'}</td>
+                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link">WA</a></td>
+                    <td>${v.nim === activeNIM ? `<button class="btn btn-danger" onclick="hapusData('lostData','${id}')">Hapus</button>` : '-'}</td>
+                </tr>`;
+            }).join('');
         });
 
+        // Listener REAL-TIME untuk Tabel Barang Ditemukan
+        onSnapshot(collection(db, "foundData"), (snapshot) => {
+            const activeNIM = sessionStorage.getItem('activeNIM');
+            const body = document.getElementById('found-table-body');
+            if (snapshot.empty) {
+                body.innerHTML = `<tr><td colspan="6" class="text-center">Belum ada data barang ditemukan.</td></tr>`;
+                return;
+            }
+            body.innerHTML = snapshot.docs.map(docSnap => {
+                const v = docSnap.data();
+                const id = docSnap.id;
+                return `<tr>
+                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<span class="no-photo">No Foto</span>`}</td>
+                    <td><b>${v.nama}</b><br><small>NIM: ${v.nim}</small></td>
+                    <td>${v.deskripsi}</td>
+                    <td>${v.lokasi}</td>
+                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link">WA</a></td>
+                    <td>${v.nim === activeNIM ? `<button class="btn btn-danger" onclick="hapusData('foundData','${id}')">Hapus</button>` : '-'}</td>
+                </tr>`;
+            }).join('');
+        });
+
+        // Submit Laporan Barang Hilang ke Firebase
+        document.getElementById('form-lost').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit-lost');
+            btn.innerText = "Mengirim..."; btn.disabled = true;
+            try {
+                const fotoBase64 = await getBase64(document.getElementById('lost-foto').files[0]);
+                await addDoc(collection(db, "lostData"), {
+                    nim: sessionStorage.getItem('activeNIM'),
+                    nama: document.getElementById('lost-nama').value,
+                    deskripsi: document.getElementById('lost-deskripsi').value,
+                    bounty: document.getElementById('lost-bounty').value,
+                    wa: document.getElementById('lost-wa').value,
+                    foto: fotoBase64,
+                    createdAt: serverTimestamp()
+                });
+                e.target.reset();
+                window.switchPage('page-dashboard');
+            } catch (err) {
+                alert("Gagal mengunggah laporan. Pastikan Rules Firestore kamu mengizinkan 'write'. Error: " + err.message);
+            } finally {
+                btn.innerText = "Kirim Laporan"; btn.disabled = false;
+            }
+        });
+
+        // Submit Laporan Barang Ditemukan ke Firebase
         document.getElementById('form-found').addEventListener('submit', async (e) => {
             e.preventDefault();
-            let data = JSON.parse(localStorage.getItem('foundData')) || [];
-            data.push({ nim: sessionStorage.getItem('activeNIM'), nama: document.getElementById('found-nama').value, deskripsi: document.getElementById('found-deskripsi').value, lokasi: document.getElementById('found-lokasi').value, wa: document.getElementById('found-wa').value, foto: await getBase64(document.getElementById('found-foto').files[0]) });
-            localStorage.setItem('foundData', JSON.stringify(data));
-            e.target.reset(); switchPage('page-dashboard');
+            const btn = document.getElementById('btn-submit-found');
+            btn.innerText = "Mengirim..."; btn.disabled = true;
+            try {
+                const fotoBase64 = await getBase64(document.getElementById('found-foto').files[0]);
+                await addDoc(collection(db, "foundData"), {
+                    nim: sessionStorage.getItem('activeNIM'),
+                    nama: document.getElementById('found-nama').value,
+                    deskripsi: document.getElementById('found-deskripsi').value,
+                    lokasi: document.getElementById('found-lokasi').value,
+                    wa: document.getElementById('found-wa').value,
+                    foto: fotoBase64,
+                    createdAt: serverTimestamp()
+                });
+                e.target.reset();
+                window.switchPage('page-dashboard');
+            } catch (err) {
+                alert("Gagal mengunggah laporan. Pastikan Rules Firestore kamu mengizinkan 'write'. Error: " + err.message);
+            } finally {
+                btn.innerText = "Kirim Laporan"; btn.disabled = false;
+            }
         });
 
         checkLoginStatus();
