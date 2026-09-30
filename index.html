@@ -4,26 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Lost & Found - UIN Sunan Ampel</title>
+    
     <!-- Font Google: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* THEME STYLES */
+        /* THEME STYLES - UINSA IDENTITY */
         :root {
-            --uinsa-green: #006633;
-            --uinsa-light-green: #e6f4ea;
-            --uinsa-gold: #d97706;
-            --danger: #dc2626;
-            --success: #16a34a;
-            --bg-body: #f1f5f9;
+            --uinsa-green: #005930; /* Hijau Khas UINSA */
+            --uinsa-green-light: #007a43;
+            --uinsa-gold: #d4af37; /* Emas Khas UINSA */
+            --uinsa-gold-light: #fcd34d;
+            --danger: #ef4444;
+            --danger-hover: #dc2626;
+            --success: #10b981;
+            --success-hover: #059669;
+            --bg-body: #f4f7f6;
             --card-bg: #ffffff;
-            --text-primary: #0f172a;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
             --border-color: #e2e8f0;
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
-            --radius-md: 10px;
-            --radius-lg: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --radius-md: 12px;
+            --radius-lg: 20px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,70 +41,126 @@
         body {
             font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
             background-color: var(--bg-body);
+            background-image: radial-gradient(#00593011 1px, transparent 1px);
+            background-size: 20px 20px;
             color: var(--text-primary);
-            line-height: 1.5;
+            line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .navbar { background: linear-gradient(135deg, #005229 0%, #006633 60%, #008040 100%); color: white; padding: 14px 24px; box-shadow: var(--shadow-md); border-bottom: 4px solid #eab308; }
-        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .brand { display: flex; align-items: center; gap: 12px; }
-        .brand-logo { background-color: #eab308; color: #004d26; font-weight: 800; font-size: 16px; padding: 6px 10px; border-radius: 6px; }
-        .brand-title { display: block; font-size: 16px; font-weight: 700; }
-        .brand-subtitle { display: block; font-size: 11px; color: #cbd5e1; }
-        .user-session { display: flex; align-items: center; gap: 12px; }
-        .user-badge { background: rgba(255, 255, 255, 0.15); padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
-        .btn-logout { background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+        /* ANIMASI FADE-IN */
+        .fade-in {
+            animation: fadeInAnimation 0.4s ease-out forwards;
+        }
+        @keyframes fadeInAnimation {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        .main-content { padding: 30px 16px; }
+        /* NAVBAR AESTHETIC */
+        .navbar { 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px; 
+            box-shadow: var(--shadow-sm); 
+            border-bottom: 3px solid var(--uinsa-gold); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 15px; }
+        .brand-logo img { height: 45px; width: auto; object-fit: contain; }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-title { font-size: 17px; font-weight: 800; color: var(--uinsa-green); letter-spacing: 0.5px; }
+        .brand-subtitle { font-size: 11px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
+        
+        .user-session { display: flex; align-items: center; gap: 15px; }
+        .user-badge { background: #f1f5f9; color: var(--uinsa-green); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; border: 1px solid var(--border-color); }
+        .btn-logout { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-logout:hover { background: var(--danger); color: white; }
+
+        /* MAIN CONTENT & CARDS */
+        .main-content { padding: 40px 16px; }
         .container { max-width: 1050px; margin: 0 auto; }
-        .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
-        .card-login { max-width: 420px; margin: 40px auto; }
-        .portal-badge { display: inline-block; background: var(--uinsa-light-green); color: var(--uinsa-green); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
+        .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 35px; box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.5); }
         
-        .form-group { margin-bottom: 18px; text-align: left; }
-        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-        input, textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-md); font-family: inherit; }
-        .btn { display: inline-block; padding: 10px 20px; font-size: 14px; font-weight: 600; border-radius: var(--radius-md); border: none; cursor: pointer; text-align: center; }
+        /* LOGIN PAGE SPESIFIK */
+        .card-login { max-width: 420px; margin: 40px auto; position: relative; overflow: hidden; }
+        .card-login::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--uinsa-green), var(--uinsa-gold)); }
+
+        /* HERO SECTION */
+        .hero-section { position: relative; padding: 60px 30px; text-align: center; background: linear-gradient(135deg, var(--uinsa-green) 0%, #003d20 100%); border-radius: var(--radius-lg); color: white; overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 40px; }
+        .hero-section::after { content: ''; position: absolute; right: -50px; bottom: -50px; width: 300px; height: 300px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/44/Logo_UIN_Sunan_Ampel_Surabaya.png'); background-size: contain; background-repeat: no-repeat; opacity: 0.07; transform: rotate(-15deg); pointer-events: none; }
+        .status-chip { display: inline-block; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--uinsa-gold-light); font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; backdrop-filter: blur(5px); }
+        .hero-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .hero-desc { font-size: 1rem; color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; font-size: 14px; font-weight: 700; border-radius: var(--radius-md); border: none; cursor: pointer; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .btn:active { transform: translateY(0); }
         .btn-block { width: 100%; }
-        .btn-primary { background-color: var(--uinsa-green); color: white; }
+        .btn-primary { background: var(--uinsa-green); color: white; }
+        .btn-primary:hover { background: var(--uinsa-green-light); }
         .btn-danger { background-color: var(--danger); color: white; }
+        .btn-danger:hover { background-color: var(--danger-hover); }
         .btn-success { background-color: var(--success); color: white; }
-        .btn-outline { background: transparent; border: 1px solid var(--border-color); }
+        .btn-success:hover { background-color: var(--success-hover); }
+        .btn-outline { background: transparent; border: 2px solid var(--border-color); color: var(--text-primary); }
+        .btn-outline:hover { border-color: var(--text-primary); }
+        .btn-gold { background-color: var(--uinsa-gold); color: white; }
+
+        /* FORMS */
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+        input, textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); font-family: inherit; font-size: 14px; background-color: #f8fafc; transition: 0.3s; }
+        input:focus, textarea:focus { outline: none; border-color: var(--uinsa-green); box-shadow: 0 0 0 3px rgba(0, 89, 48, 0.1); background-color: white; }
+        textarea { min-height: 100px; resize: vertical; }
+
+        /* DASHBOARD & TABLES */
+        .section-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; margin-bottom: 30px; box-shadow: var(--shadow-md); }
+        .section-title-bar { padding: 18px 24px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;}
+        .lost-header { background: linear-gradient(to right, #fef2f2, white); border-left: 4px solid var(--danger); }
+        .found-header { background: linear-gradient(to right, #f0fdf4, white); border-left: 4px solid var(--success); }
+        .section-title-bar h3 { font-size: 16px; display: flex; align-items: center; gap: 8px; }
         
-        .section-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; margin-bottom: 30px;}
-        .section-title-bar { padding: 16px 20px; border-bottom: 1px solid var(--border-color); }
-        .lost-header { background-color: #fef2f2; }
-        .found-header { background-color: #f0fdf4; }
         .table-responsive { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 750px; }
-        th { background-color: #f8fafc; font-size: 12px; padding: 12px 16px; text-align: left; }
-        td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
-        .item-photo { width: 65px; height: 65px; object-fit: cover; border-radius: 6px; }
-        .no-photo { font-size: 11px; background: #f1f5f9; padding: 8px; border-radius: 6px; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th { background-color: #f8fafc; font-size: 13px; font-weight: 700; color: var(--text-secondary); padding: 14px 20px; text-align: left; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); font-size: 14px; vertical-align: middle; transition: 0.2s; }
+        tr:hover td { background-color: #f8fafc; }
         
+        .item-photo { width: 70px; height: 70px; object-fit: cover; border-radius: 10px; box-shadow: var(--shadow-sm); }
+        .no-photo { display: inline-flex; justify-content: center; align-items: center; width: 70px; height: 70px; font-size: 11px; background: #e2e8f0; color: #64748b; border-radius: 10px; text-align: center; }
+        
+        .wa-link { display: inline-flex; align-items: center; gap: 6px; background-color: #25D366; color: white; padding: 8px 14px; text-decoration: none; border-radius: 8px; font-size: 12px; font-weight: 700; transition: 0.3s; }
+        .wa-link:hover { background-color: #1ebc59; transform: scale(1.05); }
+
         .hidden { display: none !important; }
         .flex-between { display: flex; justify-content: space-between; align-items: center; }
         .text-center { text-align: center; }
-        .wa-link { background-color: #25D366; color: white; padding: 6px 12px; text-decoration: none; border-radius: 6px; font-size: 12px; font-weight: 600; }
-        .hero-section { padding: 40px 20px; }
-        .status-chip { background: #fef3c7; color: var(--uinsa-gold); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 12px; }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <header class="navbar">
         <div class="nav-container">
             <div class="brand">
-                <div class="brand-logo">UINSA</div>
+                <!-- LOGO ASLI UINSA -->
+                <div class="brand-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Logo_UIN_Sunan_Ampel_Surabaya.png" alt="Logo UINSA">
+                </div>
                 <div class="brand-text">
                     <span class="brand-title">PORTAL LOST & FOUND</span>
                     <span class="brand-subtitle">UIN Sunan Ampel Surabaya</span>
                 </div>
             </div>
             <div id="user-session" class="user-session hidden">
-                <span class="user-badge">🔑 <span id="display-nim"></span></span>
-                <button class="btn-logout" onclick="logout()">Keluar</button>
+                <span class="user-badge"><i class="fa-solid fa-user-graduate"></i> <span id="display-nim"></span></span>
+                <button class="btn-logout" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
             </div>
         </div>
     </header>
@@ -102,71 +168,84 @@
     <main class="main-content">
         <div class="container" id="main-container">
             
-            <!-- HALAMAN 0: LOGIN (Desain MyUinsa) -->
-            <div id="page-login" class="card card-login" style="max-width: 420px; margin: 60px auto; padding: 40px 30px; border-radius: 16px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08);">
+            <!-- HALAMAN 0: LOGIN (Desain Estetik MyUINSA) -->
+            <div id="page-login" class="card card-login fade-in">
                 <div class="card-header text-center" style="margin-bottom: 30px;">
-                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 16px;">
-                        <div style="background-color: var(--uinsa-green); color: white; font-weight: 800; font-size: 22px; padding: 8px 14px; border-radius: 8px;">UINSA</div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Logo_UIN_Sunan_Ampel_Surabaya.png" alt="UINSA" style="height: 70px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
                     </div>
-                    <h2 style="font-size: 24px; font-weight: 700; color: #0f172a;">Sign in to <span style="color: var(--uinsa-green);">MyUinsa</span></h2>
+                    <h2 style="font-size: 24px; font-weight: 800; color: var(--text-primary);">Sign in to <span style="color: var(--uinsa-green);">MyUinsa</span></h2>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 5px;">Portal Layanan Terpadu Mahasiswa</p>
                 </div>
                 <form id="form-login">
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="color: #475569; font-size: 14px; font-weight: 600;">NIP / NIM / NIK</label>
-                        <input type="text" id="login-nim" required style="padding: 12px 16px; border-radius: 8px; background-color: #f8fafc; border: 1px solid #cbd5e1; font-size: 15px;">
+                    <div class="form-group">
+                        <label><i class="fa-regular fa-id-card"></i> NIP / NIM / NIK</label>
+                        <input type="text" id="login-nim" placeholder="Masukkan NIM Anda..." required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 24px;">
-                        <label style="color: #475569; font-size: 14px; font-weight: 600;">Password</label>
-                        <input type="password" id="login-pass" required style="padding: 12px 16px; border-radius: 8px; background-color: #f8fafc; border: 1px solid #cbd5e1; font-size: 15px;">
+                    <div class="form-group" style="margin-bottom: 28px;">
+                        <label><i class="fa-solid fa-lock"></i> Password</label>
+                        <input type="password" id="login-pass" placeholder="••••••••" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" style="padding: 12px 20px; font-size: 16px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 102, 51, 0.2);">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In</button>
                 </form>
-                <div style="text-align: center; margin-top: 30px; font-size: 12.5px; color: #64748b; line-height: 1.5; border-top: 1px solid #f1f5f9; padding-top: 20px;">
-                    Platform untuk mendukung proses perkuliahan di Universitas Islam Negeri Sunan Ampel Surabaya.
+                <div style="text-align: center; margin-top: 30px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                    Platform untuk mendukung proses akademik di <br><b>Universitas Islam Negeri Sunan Ampel Surabaya</b>.
                 </div>
             </div>
 
             <!-- HALAMAN 1: LANDING PAGE -->
-            <div id="page-home" class="card hidden text-center">
+            <div id="page-home" class="hidden">
                 <div class="hero-section">
-                    <span class="status-chip">Layanan Kemahasiswaan</span>
-                    <h1 style="color:var(--uinsa-green); margin: 16px 0;">Layanan Pelaporan & Pencarian Barang</h1>
-                    <p style="margin-bottom:20px;">Fasilitas resmi untuk membantu civitas akademika UIN Sunan Ampel Surabaya dalam menemukan dan mengamankan barang hilang.</p>
-                    <button class="btn btn-primary" onclick="switchPage('page-dashboard')">Buka Dashboard Laporan</button>
+                    <span class="status-chip"><i class="fa-solid fa-shield-halved"></i> Layanan Keamanan & Ketertiban Kampus</span>
+                    <h1 class="hero-title">Kehilangan atau Menemukan Barang?</h1>
+                    <p class="hero-desc">Fasilitas resmi untuk membantu civitas akademika UIN Sunan Ampel Surabaya saling membantu dalam menemukan dan mengembalikan barang yang hilang di area kampus.</p>
+                    <div style="display: flex; gap: 15px; justify-content: center;">
+                        <button class="btn btn-gold" style="color:var(--text-primary);" onclick="switchPage('page-dashboard')">
+                            <i class="fa-solid fa-magnifying-glass"></i> Cari Barang
+                        </button>
+                        <button class="btn btn-outline" style="border-color: rgba(255,255,255,0.5); color: white;" onclick="switchPage('page-dashboard')">
+                            <i class="fa-solid fa-bullhorn"></i> Buat Laporan
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- HALAMAN 2: DASHBOARD -->
             <div id="page-dashboard" class="hidden">
-                <div class="flex-between" style="margin-bottom: 20px;">
-                    <h2>Dashboard Informasi Barang</h2>
-                    <button class="btn btn-outline" onclick="switchPage('page-home')">← Kembali</button>
+                <div class="flex-between" style="margin-bottom: 25px;">
+                    <div>
+                        <h2 style="font-weight: 800; color: var(--uinsa-green);"><i class="fa-solid fa-table-columns"></i> Dashboard Laporan</h2>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Pusat informasi barang hilang dan ditemukan di UINSA.</p>
+                    </div>
+                    <button class="btn btn-outline" onclick="switchPage('page-home')"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
                 </div>
 
+                <!-- SECTION BARANG HILANG -->
                 <div class="section-card">
-                    <div class="flex-between section-title-bar lost-header">
-                        <h3>🔴 Barang Hilang (Lost)</h3>
-                        <button class="btn btn-danger" onclick="switchPage('page-form-lost')">+ Lapor Kehilangan</button>
+                    <div class="section-title-bar lost-header">
+                        <h3 style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> Sedang Dicari (Barang Hilang)</h3>
+                        <button class="btn btn-danger" onclick="switchPage('page-form-lost')"><i class="fa-solid fa-plus"></i> Lapor Kehilangan</button>
                     </div>
                     <div class="table-responsive">
                         <table>
                             <thead>
-                                <tr><th>Foto</th><th>Pelapor</th><th>Deskripsi Barang</th><th>Imbalan</th><th>Kontak WA</th><th>Aksi</th></tr>
+                                <tr><th>Foto</th><th>Info Pelapor</th><th>Detail Barang</th><th>Imbalan</th><th>Kontak WA</th><th>Aksi</th></tr>
                             </thead>
                             <tbody id="lost-table-body"></tbody>
                         </table>
                     </div>
                 </div>
 
+                <!-- SECTION BARANG DITEMUKAN -->
                 <div class="section-card">
-                    <div class="flex-between section-title-bar found-header">
-                        <h3>🟢 Barang Ditemukan (Found)</h3>
-                        <button class="btn btn-success" onclick="switchPage('page-form-found')">+ Lapor Penemuan</button>
+                    <div class="section-title-bar found-header">
+                        <h3 style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> Telah Ditemukan (Aman)</h3>
+                        <button class="btn btn-success" onclick="switchPage('page-form-found')"><i class="fa-solid fa-plus"></i> Lapor Penemuan</button>
                     </div>
                     <div class="table-responsive">
                         <table>
                             <thead>
-                                <tr><th>Foto</th><th>Penemu</th><th>Deskripsi Barang</th><th>Lokasi Ditemukan</th><th>Kontak WA</th><th>Aksi</th></tr>
+                                <tr><th>Foto</th><th>Penemu (Hero)</th><th>Detail Barang</th><th>Lokasi Ditemukan</th><th>Kontak WA</th><th>Aksi</th></tr>
                             </thead>
                             <tbody id="found-table-body"></tbody>
                         </table>
@@ -174,33 +253,40 @@
                 </div>
             </div>
 
-            <!-- HALAMAN 3 & 4: FORMS -->
+            <!-- HALAMAN 3: FORM LOST -->
             <div id="page-form-lost" class="card hidden">
-                <h2>Lapor Kehilangan Barang</h2><br>
+                <h2 style="color: var(--danger); margin-bottom: 5px;"><i class="fa-solid fa-file-circle-exclamation"></i> Lapor Kehilangan Barang</h2>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 25px;">Harap isi detail barang yang hilang dengan sejelas mungkin.</p>
+                
                 <form id="form-lost">
-                    <div class="form-group"><label>Nama Lengkap</label><input type="text" id="lost-nama" required></div>
-                    <div class="form-group"><label>Deskripsi Barang</label><textarea id="lost-deskripsi" required></textarea></div>
-                    <div class="form-group"><label>Bounty / Imbalan</label><input type="text" id="lost-bounty"></div>
-                    <div class="form-group"><label>No WhatsApp</label><input type="number" id="lost-wa" required></div>
-                    <div class="form-group"><label>Foto</label><input type="file" id="lost-foto" accept="image/*"></div>
-                    <div class="flex-between">
+                    <div class="form-group"><label>Nama Lengkap (Pelapor)</label><input type="text" id="lost-nama" placeholder="Contoh: Ahmad Budi..." required></div>
+                    <div class="form-group"><label>Deskripsi Detail Barang</label><textarea id="lost-deskripsi" placeholder="Warna, merk, ciri-ciri khusus, perkiraan hilang dimana..." required></textarea></div>
+                    <div class="form-group"><label>Bounty / Imbalan (Opsional)</label><input type="text" id="lost-bounty" placeholder="Contoh: Rp 50.000 / Traktir Kopi"></div>
+                    <div class="form-group"><label>No WhatsApp Aktif</label><input type="number" id="lost-wa" placeholder="081234567890" required></div>
+                    <div class="form-group"><label>Foto Barang (Jika Ada)</label><input type="file" id="lost-foto" accept="image/*"></div>
+                    
+                    <div class="flex-between" style="margin-top: 30px;">
                         <button type="button" class="btn btn-outline" onclick="switchPage('page-dashboard')">Batal</button>
-                        <button type="submit" class="btn btn-danger" id="btn-submit-lost">Kirim Laporan</button>
+                        <button type="submit" class="btn btn-danger" id="btn-submit-lost"><i class="fa-solid fa-paper-plane"></i> Publikasikan Laporan</button>
                     </div>
                 </form>
             </div>
 
+            <!-- HALAMAN 4: FORM FOUND -->
             <div id="page-form-found" class="card hidden">
-                <h2>Lapor Penemuan Barang</h2><br>
+                <h2 style="color: var(--success); margin-bottom: 5px;"><i class="fa-solid fa-file-circle-check"></i> Lapor Penemuan Barang</h2>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 25px;">Terima kasih orang baik! Silakan catat detail barang yang Anda amankan.</p>
+                
                 <form id="form-found">
-                    <div class="form-group"><label>Nama Penemu</label><input type="text" id="found-nama" required></div>
-                    <div class="form-group"><label>Deskripsi Barang</label><textarea id="found-deskripsi" required></textarea></div>
-                    <div class="form-group"><label>Lokasi Ditemukan</label><input type="text" id="found-lokasi" required></div>
-                    <div class="form-group"><label>No WhatsApp</label><input type="number" id="found-wa" required></div>
-                    <div class="form-group"><label>Foto (Wajib)</label><input type="file" id="found-foto" accept="image/*" required></div>
-                    <div class="flex-between">
+                    <div class="form-group"><label>Nama Lengkap (Penemu)</label><input type="text" id="found-nama" placeholder="Contoh: Siti Aisyah..." required></div>
+                    <div class="form-group"><label>Deskripsi Detail Barang</label><textarea id="found-deskripsi" placeholder="Barang apa, warna, kondisi..." required></textarea></div>
+                    <div class="form-group"><label>Lokasi Ditemukan</label><input type="text" id="found-lokasi" placeholder="Contoh: Kantin Fakultas Tarbiyah / Masjid Raya" required></div>
+                    <div class="form-group"><label>No WhatsApp Aktif</label><input type="number" id="found-wa" placeholder="081234567890" required></div>
+                    <div class="form-group"><label>Foto Barang (Wajib)</label><input type="file" id="found-foto" accept="image/*" required></div>
+                    
+                    <div class="flex-between" style="margin-top: 30px;">
                         <button type="button" class="btn btn-outline" onclick="switchPage('page-dashboard')">Batal</button>
-                        <button type="submit" class="btn btn-success" id="btn-submit-found">Kirim Laporan</button>
+                        <button type="submit" class="btn btn-success" id="btn-submit-found"><i class="fa-solid fa-paper-plane"></i> Publikasikan Laporan</button>
                     </div>
                 </form>
             </div>
@@ -208,12 +294,11 @@
         </div>
     </main>
 
-    <!-- FIREBASE MODULE SCRIPT -->
+    <!-- FIREBASE MODULE SCRIPT (Konfigurasi Anda tetap aman) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Konfigurasi Firebase dari akunmu
         const firebaseConfig = {
             apiKey: "AIzaSyAAvTpntEGvlFtTJS4IkAwv9mzaiSa_E8c",
             authDomain: "lostandfound-75bcd.firebaseapp.com",
@@ -224,16 +309,24 @@
             measurementId: "G-H638SQTDJ4"
         };
 
-        // Inisialisasi Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Fungsi Global untuk UI HTML
+        // FUNGSI ANIMASI PINDAH HALAMAN
         window.switchPage = function(pageId) {
-            ['page-login', 'page-home', 'page-dashboard', 'page-form-lost', 'page-form-found'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
+            const pages = ['page-login', 'page-home', 'page-dashboard', 'page-form-lost', 'page-form-found'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                el.classList.add('hidden');
+                el.classList.remove('fade-in');
             });
-            document.getElementById(pageId).classList.remove('hidden');
+            
+            const activePage = document.getElementById(pageId);
+            activePage.classList.remove('hidden');
+            
+            // Trigger trik reflow agar animasi jalan ulang
+            void activePage.offsetWidth; 
+            activePage.classList.add('fade-in');
         };
 
         window.logout = function() {
@@ -251,7 +344,6 @@
             }
         };
 
-        // Autentikasi Sederhana
         function checkLoginStatus() {
             const nim = sessionStorage.getItem('activeNIM');
             if (nim) {
@@ -271,10 +363,8 @@
             e.target.reset();
         });
 
-        // Utilitas
         function formatWA(num) { return String(num).startsWith('0') ? '62' + String(num).substring(1) : num; }
         
-        // Kompresi Gambar agar database tidak cepat penuh
         function getBase64(file) { 
             return new Promise((res, rej) => { 
                 if(!file) return res(""); 
@@ -284,68 +374,68 @@
                     img.src = e.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 400; // Dikompres agar lebih kecil
+                        const MAX_WIDTH = 400; 
                         const scaleSize = MAX_WIDTH / img.width;
                         canvas.width = (img.width > MAX_WIDTH) ? MAX_WIDTH : img.width;
                         canvas.height = (img.width > MAX_WIDTH) ? (img.height * scaleSize) : img.height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        res(canvas.toDataURL('image/jpeg', 0.6));
+                        res(canvas.toDataURL('image/jpeg', 0.7));
                     };
                 }; 
                 reader.readAsDataURL(file); 
             }); 
         }
 
-        // Listener REAL-TIME untuk Tabel Barang Hilang
+        // TABEL BARANG HILANG
         onSnapshot(collection(db, "lostData"), (snapshot) => {
             const activeNIM = sessionStorage.getItem('activeNIM');
             const body = document.getElementById('lost-table-body');
             if (snapshot.empty) {
-                body.innerHTML = `<tr><td colspan="6" class="text-center">Belum ada data barang hilang.</td></tr>`;
+                body.innerHTML = `<tr><td colspan="6" class="text-center" style="padding: 30px; color: #94a3b8;"><i class="fa-solid fa-box-open fa-2x"></i><br>Belum ada data barang hilang saat ini.</td></tr>`;
                 return;
             }
             body.innerHTML = snapshot.docs.map(docSnap => {
                 const v = docSnap.data();
                 const id = docSnap.id;
                 return `<tr>
-                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<span class="no-photo">No Foto</span>`}</td>
-                    <td><b>${v.nama}</b><br><small>NIM: ${v.nim}</small></td>
+                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<div class="no-photo"><i class="fa-regular fa-image fa-lg"></i></div>`}</td>
+                    <td><b style="color:var(--text-primary);">${v.nama}</b><br><span style="font-size:12px; color:var(--text-secondary);"><i class="fa-regular fa-id-badge"></i> ${v.nim}</span></td>
                     <td>${v.deskripsi}</td>
-                    <td>${v.bounty || '-'}</td>
-                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link">WA</a></td>
-                    <td>${v.nim === activeNIM ? `<button class="btn btn-danger" onclick="hapusData('lostData','${id}')">Hapus</button>` : '-'}</td>
+                    <td><span style="background:#fef3c7; color:#b45309; padding:4px 8px; border-radius:6px; font-size:12px; font-weight:700;">${v.bounty || 'Tidak ada'}</span></td>
+                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link"><i class="fa-brands fa-whatsapp fa-lg"></i> Hubungi</a></td>
+                    <td>${v.nim === activeNIM ? `<button class="btn btn-outline" style="color:var(--danger); padding:6px 12px; border-color:var(--danger);" onclick="hapusData('lostData','${id}')"><i class="fa-solid fa-trash"></i></button>` : '-'}</td>
                 </tr>`;
             }).join('');
         });
 
-        // Listener REAL-TIME untuk Tabel Barang Ditemukan
+        // TABEL BARANG DITEMUKAN
         onSnapshot(collection(db, "foundData"), (snapshot) => {
             const activeNIM = sessionStorage.getItem('activeNIM');
             const body = document.getElementById('found-table-body');
             if (snapshot.empty) {
-                body.innerHTML = `<tr><td colspan="6" class="text-center">Belum ada data barang ditemukan.</td></tr>`;
+                body.innerHTML = `<tr><td colspan="6" class="text-center" style="padding: 30px; color: #94a3b8;"><i class="fa-solid fa-box-open fa-2x"></i><br>Belum ada data barang ditemukan saat ini.</td></tr>`;
                 return;
             }
             body.innerHTML = snapshot.docs.map(docSnap => {
                 const v = docSnap.data();
                 const id = docSnap.id;
                 return `<tr>
-                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<span class="no-photo">No Foto</span>`}</td>
-                    <td><b>${v.nama}</b><br><small>NIM: ${v.nim}</small></td>
+                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<div class="no-photo"><i class="fa-regular fa-image fa-lg"></i></div>`}</td>
+                    <td><b style="color:var(--text-primary);">${v.nama}</b><br><span style="font-size:12px; color:var(--text-secondary);"><i class="fa-regular fa-id-badge"></i> ${v.nim}</span></td>
                     <td>${v.deskripsi}</td>
-                    <td>${v.lokasi}</td>
-                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link">WA</a></td>
-                    <td>${v.nim === activeNIM ? `<button class="btn btn-danger" onclick="hapusData('foundData','${id}')">Hapus</button>` : '-'}</td>
+                    <td><i class="fa-solid fa-location-dot" style="color:var(--danger);"></i> ${v.lokasi}</td>
+                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link"><i class="fa-brands fa-whatsapp fa-lg"></i> Hubungi</a></td>
+                    <td>${v.nim === activeNIM ? `<button class="btn btn-outline" style="color:var(--danger); padding:6px 12px; border-color:var(--danger);" onclick="hapusData('foundData','${id}')"><i class="fa-solid fa-trash"></i></button>` : '-'}</td>
                 </tr>`;
             }).join('');
         });
 
-        // Submit Laporan Barang Hilang ke Firebase
+        // SUBMIT LOST
         document.getElementById('form-lost').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-submit-lost');
-            btn.innerText = "Mengirim..."; btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...`; btn.disabled = true;
             try {
                 const fotoBase64 = await getBase64(document.getElementById('lost-foto').files[0]);
                 await addDoc(collection(db, "lostData"), {
@@ -360,17 +450,17 @@
                 e.target.reset();
                 window.switchPage('page-dashboard');
             } catch (err) {
-                alert("Gagal mengunggah laporan. Pastikan Rules Firestore kamu mengizinkan 'write'. Error: " + err.message);
+                alert("Gagal mengunggah laporan. Error: " + err.message);
             } finally {
-                btn.innerText = "Kirim Laporan"; btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Publikasikan Laporan`; btn.disabled = false;
             }
         });
 
-        // Submit Laporan Barang Ditemukan ke Firebase
+        // SUBMIT FOUND
         document.getElementById('form-found').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-submit-found');
-            btn.innerText = "Mengirim..."; btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...`; btn.disabled = true;
             try {
                 const fotoBase64 = await getBase64(document.getElementById('found-foto').files[0]);
                 await addDoc(collection(db, "foundData"), {
@@ -385,9 +475,9 @@
                 e.target.reset();
                 window.switchPage('page-dashboard');
             } catch (err) {
-                alert("Gagal mengunggah laporan. Pastikan Rules Firestore kamu mengizinkan 'write'. Error: " + err.message);
+                alert("Gagal mengunggah laporan. Error: " + err.message);
             } finally {
-                btn.innerText = "Kirim Laporan"; btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Publikasikan Laporan`; btn.disabled = false;
             }
         });
 
