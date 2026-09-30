@@ -71,7 +71,7 @@
         }
         .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .brand { display: flex; align-items: center; gap: 15px; }
-        .brand-logo img { height: 45px; width: auto; object-fit: contain; }
+        .brand-logo img { height: 48px; width: auto; object-fit: contain; }
         .brand-text { display: flex; flex-direction: column; }
         .brand-title { font-size: 17px; font-weight: 800; color: var(--uinsa-green); letter-spacing: 0.5px; }
         .brand-subtitle { font-size: 11px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
@@ -92,7 +92,6 @@
 
         /* HERO SECTION */
         .hero-section { position: relative; padding: 60px 30px; text-align: center; background: linear-gradient(135deg, var(--uinsa-green) 0%, #003d20 100%); border-radius: var(--radius-lg); color: white; overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 40px; }
-        .hero-section::after { content: ''; position: absolute; right: -30px; bottom: -30px; width: 300px; height: 300px; background-image: url('https://my.uinsa.ac.id/assets/media/logo/logo-sm.png'); background-size: contain; background-repeat: no-repeat; opacity: 0.1; transform: rotate(-10deg); pointer-events: none; }
         .status-chip { display: inline-block; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--uinsa-gold-light); font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; backdrop-filter: blur(5px); }
         .hero-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .hero-desc { font-size: 1rem; color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; }
@@ -149,9 +148,9 @@
     <header class="navbar">
         <div class="nav-container">
             <div class="brand">
-                <!-- LOGO ASLI UINSA -->
+                <!-- LOGO LANGSUNG DITANAM (BASE64) -->
                 <div class="brand-logo">
-                    <img src="https://my.uinsa.ac.id/assets/media/logo/logo-sm.png" alt="Logo UINSA">
+                    <img src="data:image/png;base64,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" alt="Logo UINSA">
                 </div>
                 <div class="brand-text">
                     <span class="brand-title">PORTAL LOST & FOUND</span>
@@ -168,11 +167,13 @@
     <main class="main-content">
         <div class="container" id="main-container">
             
-            <!-- HALAMAN 0: LOGIN (Desain Estetik MyUINSA) -->
+            <!-- HALAMAN 0: LOGIN -->
             <div id="page-login" class="card card-login fade-in">
                 <div class="card-header text-center" style="margin-bottom: 30px;">
                     <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
-                        <img src="https://my.uinsa.ac.id/assets/media/logo/logo-sm.png" alt="UINSA" style="height: 70px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
+                        <img src="data:image/png;base64,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" 
+                             alt="UINSA" 
+                             style="height: 70px; width: auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
                     </div>
                     <h2 style="font-size: 24px; font-weight: 800; color: var(--text-primary);">Sign in to <span style="color: var(--uinsa-green);">MyUinsa</span></h2>
                     <p style="font-size: 13px; color: var(--text-secondary); margin-top: 5px;">Portal Layanan Terpadu Mahasiswa</p>
@@ -310,7 +311,11 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // FUNGSI ANIMASI PINDAH HALAMAN
+        // VARIABEL PENYIMPAN DATA DARI FIRESTORE
+        let currentLostDocs = [];
+        let currentFoundDocs = [];
+
+        // FUNGSI NAVIGASI
         window.switchPage = function(pageId) {
             const pages = ['page-login', 'page-home', 'page-dashboard', 'page-form-lost', 'page-form-found'];
             pages.forEach(id => {
@@ -322,7 +327,6 @@
             const activePage = document.getElementById(pageId);
             activePage.classList.remove('hidden');
             
-            // Trigger trik reflow agar animasi jalan ulang
             void activePage.offsetWidth; 
             activePage.classList.add('fade-in');
         };
@@ -332,15 +336,76 @@
             checkLoginStatus();
         };
 
-        window.hapusData = async function(collectionName, docId) {
-            if (confirm("Apakah Anda yakin ingin menghapus laporan ini?")) {
+        // FUNGSI HAPUS HANYA UNTUK PEMILIK LAPORAN (PROTEKSI NIM)
+        window.hapusData = async function(collectionName, docId, ownerNim) {
+            const activeNIM = String(sessionStorage.getItem('activeNIM') || '').trim();
+            const targetOwner = String(ownerNim || '').trim();
+
+            if (!activeNIM || activeNIM !== targetOwner) {
+                alert("Akses Ditolak! Anda hanya dapat menghapus laporan milik NIM Anda sendiri (" + activeNIM + ").");
+                return;
+            }
+
+            if (confirm("Apakah Anda yakin ingin menghapus laporan ini? Data yang dihapus tidak dapat dikembalikan.")) {
                 try {
                     await deleteDoc(doc(db, collectionName, docId));
+                    alert("Laporan berhasil dihapus!");
                 } catch (err) {
                     alert("Gagal menghapus data: " + err.message);
                 }
             }
         };
+
+        function formatWA(num) { return String(num).startsWith('0') ? '62' + String(num).substring(1) : num; }
+
+        // FUNGSI RENDER TABEL UTAMA DENGAN FILTER PEMILIK NIM
+        function renderTables() {
+            const activeNIM = String(sessionStorage.getItem('activeNIM') || '').trim();
+
+            // RENDER TABEL BARANG HILANG
+            const lostBody = document.getElementById('lost-table-body');
+            if (currentLostDocs.length === 0) {
+                lostBody.innerHTML = `<tr><td colspan="6" class="text-center" style="padding: 30px; color: #94a3b8;"><i class="fa-solid fa-box-open fa-2x"></i><br>Belum ada data barang hilang saat ini.</td></tr>`;
+            } else {
+                lostBody.innerHTML = currentLostDocs.map(docSnap => {
+                    const v = docSnap.data();
+                    const id = docSnap.id;
+                    const itemNim = String(v.nim || '').trim();
+                    const isOwner = (activeNIM !== '' && activeNIM === itemNim);
+
+                    return `<tr>
+                        <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<div class="no-photo"><i class="fa-regular fa-image fa-lg"></i></div>`}</td>
+                        <td><b style="color:var(--text-primary);">${v.nama || '-'}</b><br><span style="font-size:12px; color:var(--text-secondary);"><i class="fa-regular fa-id-badge"></i> ${itemNim}</span></td>
+                        <td>${v.deskripsi || '-'}</td>
+                        <td><span style="background:#fef3c7; color:#b45309; padding:4px 8px; border-radius:6px; font-size:12px; font-weight:700;">${v.bounty || 'Tidak ada'}</span></td>
+                        <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link"><i class="fa-brands fa-whatsapp fa-lg"></i> Hubungi</a></td>
+                        <td>${isOwner ? `<button class="btn btn-outline" style="color:var(--danger); padding:6px 12px; border-color:var(--danger);" onclick="hapusData('lostData','${id}','${itemNim}')"><i class="fa-solid fa-trash"></i> Hapus</button>` : `<span style="color:#cbd5e1; font-size:12px;"><i class="fa-solid fa-lock"></i> Hanya Pemilik</span>`}</td>
+                    </tr>`;
+                }).join('');
+            }
+
+            // RENDER TABEL BARANG DITEMUKAN
+            const foundBody = document.getElementById('found-table-body');
+            if (currentFoundDocs.length === 0) {
+                foundBody.innerHTML = `<tr><td colspan="6" class="text-center" style="padding: 30px; color: #94a3b8;"><i class="fa-solid fa-box-open fa-2x"></i><br>Belum ada data barang ditemukan saat ini.</td></tr>`;
+            } else {
+                foundBody.innerHTML = currentFoundDocs.map(docSnap => {
+                    const v = docSnap.data();
+                    const id = docSnap.id;
+                    const itemNim = String(v.nim || '').trim();
+                    const isOwner = (activeNIM !== '' && activeNIM === itemNim);
+
+                    return `<tr>
+                        <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<div class="no-photo"><i class="fa-regular fa-image fa-lg"></i></div>`}</td>
+                        <td><b style="color:var(--text-primary);">${v.nama || '-'}</b><br><span style="font-size:12px; color:var(--text-secondary);"><i class="fa-regular fa-id-badge"></i> ${itemNim}</span></td>
+                        <td>${v.deskripsi || '-'}</td>
+                        <td><i class="fa-solid fa-location-dot" style="color:var(--danger);"></i> ${v.lokasi || '-'}</td>
+                        <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link"><i class="fa-brands fa-whatsapp fa-lg"></i> Hubungi</a></td>
+                        <td>${isOwner ? `<button class="btn btn-outline" style="color:var(--danger); padding:6px 12px; border-color:var(--danger);" onclick="hapusData('foundData','${id}','${itemNim}')"><i class="fa-solid fa-trash"></i> Hapus</button>` : `<span style="color:#cbd5e1; font-size:12px;"><i class="fa-solid fa-lock"></i> Hanya Pemilik</span>`}</td>
+                    </tr>`;
+                }).join('');
+            }
+        }
 
         function checkLoginStatus() {
             const nim = sessionStorage.getItem('activeNIM');
@@ -352,17 +417,17 @@
                 document.getElementById('user-session').classList.add('hidden');
                 window.switchPage('page-login');
             }
+            renderTables();
         }
 
         document.getElementById('form-login').addEventListener('submit', (e) => {
             e.preventDefault();
-            sessionStorage.setItem('activeNIM', document.getElementById('login-nim').value);
+            const inputNIM = String(document.getElementById('login-nim').value || '').trim();
+            sessionStorage.setItem('activeNIM', inputNIM);
             checkLoginStatus();
             e.target.reset();
         });
 
-        function formatWA(num) { return String(num).startsWith('0') ? '62' + String(num).substring(1) : num; }
-        
         function getBase64(file) { 
             return new Promise((res, rej) => { 
                 if(!file) return res(""); 
@@ -385,59 +450,27 @@
             }); 
         }
 
-        // TABEL BARANG HILANG
+        // REALTIME LISTENER FIRESTORE
         onSnapshot(collection(db, "lostData"), (snapshot) => {
-            const activeNIM = sessionStorage.getItem('activeNIM');
-            const body = document.getElementById('lost-table-body');
-            if (snapshot.empty) {
-                body.innerHTML = `<tr><td colspan="6" class="text-center" style="padding: 30px; color: #94a3b8;"><i class="fa-solid fa-box-open fa-2x"></i><br>Belum ada data barang hilang saat ini.</td></tr>`;
-                return;
-            }
-            body.innerHTML = snapshot.docs.map(docSnap => {
-                const v = docSnap.data();
-                const id = docSnap.id;
-                return `<tr>
-                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<div class="no-photo"><i class="fa-regular fa-image fa-lg"></i></div>`}</td>
-                    <td><b style="color:var(--text-primary);">${v.nama}</b><br><span style="font-size:12px; color:var(--text-secondary);"><i class="fa-regular fa-id-badge"></i> ${v.nim}</span></td>
-                    <td>${v.deskripsi}</td>
-                    <td><span style="background:#fef3c7; color:#b45309; padding:4px 8px; border-radius:6px; font-size:12px; font-weight:700;">${v.bounty || 'Tidak ada'}</span></td>
-                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link"><i class="fa-brands fa-whatsapp fa-lg"></i> Hubungi</a></td>
-                    <td>${v.nim === activeNIM ? `<button class="btn btn-outline" style="color:var(--danger); padding:6px 12px; border-color:var(--danger);" onclick="hapusData('lostData','${id}')"><i class="fa-solid fa-trash"></i></button>` : '-'}</td>
-                </tr>`;
-            }).join('');
+            currentLostDocs = snapshot.docs;
+            renderTables();
         });
 
-        // TABEL BARANG DITEMUKAN
         onSnapshot(collection(db, "foundData"), (snapshot) => {
-            const activeNIM = sessionStorage.getItem('activeNIM');
-            const body = document.getElementById('found-table-body');
-            if (snapshot.empty) {
-                body.innerHTML = `<tr><td colspan="6" class="text-center" style="padding: 30px; color: #94a3b8;"><i class="fa-solid fa-box-open fa-2x"></i><br>Belum ada data barang ditemukan saat ini.</td></tr>`;
-                return;
-            }
-            body.innerHTML = snapshot.docs.map(docSnap => {
-                const v = docSnap.data();
-                const id = docSnap.id;
-                return `<tr>
-                    <td>${v.foto ? `<img src="${v.foto}" class="item-photo">` : `<div class="no-photo"><i class="fa-regular fa-image fa-lg"></i></div>`}</td>
-                    <td><b style="color:var(--text-primary);">${v.nama}</b><br><span style="font-size:12px; color:var(--text-secondary);"><i class="fa-regular fa-id-badge"></i> ${v.nim}</span></td>
-                    <td>${v.deskripsi}</td>
-                    <td><i class="fa-solid fa-location-dot" style="color:var(--danger);"></i> ${v.lokasi}</td>
-                    <td><a href="https://wa.me/${formatWA(v.wa)}" target="_blank" class="wa-link"><i class="fa-brands fa-whatsapp fa-lg"></i> Hubungi</a></td>
-                    <td>${v.nim === activeNIM ? `<button class="btn btn-outline" style="color:var(--danger); padding:6px 12px; border-color:var(--danger);" onclick="hapusData('foundData','${id}')"><i class="fa-solid fa-trash"></i></button>` : '-'}</td>
-                </tr>`;
-            }).join('');
+            currentFoundDocs = snapshot.docs;
+            renderTables();
         });
 
-        // SUBMIT LOST
+        // SUBMIT LOST REPORT
         document.getElementById('form-lost').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-submit-lost');
             btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...`; btn.disabled = true;
             try {
+                const activeNIM = String(sessionStorage.getItem('activeNIM') || '').trim();
                 const fotoBase64 = await getBase64(document.getElementById('lost-foto').files[0]);
                 await addDoc(collection(db, "lostData"), {
-                    nim: sessionStorage.getItem('activeNIM'),
+                    nim: activeNIM,
                     nama: document.getElementById('lost-nama').value,
                     deskripsi: document.getElementById('lost-deskripsi').value,
                     bounty: document.getElementById('lost-bounty').value,
@@ -454,15 +487,16 @@
             }
         });
 
-        // SUBMIT FOUND
+        // SUBMIT FOUND REPORT
         document.getElementById('form-found').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-submit-found');
             btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...`; btn.disabled = true;
             try {
+                const activeNIM = String(sessionStorage.getItem('activeNIM') || '').trim();
                 const fotoBase64 = await getBase64(document.getElementById('found-foto').files[0]);
                 await addDoc(collection(db, "foundData"), {
-                    nim: sessionStorage.getItem('activeNIM'),
+                    nim: activeNIM,
                     nama: document.getElementById('found-nama').value,
                     deskripsi: document.getElementById('found-deskripsi').value,
                     lokasi: document.getElementById('found-lokasi').value,
